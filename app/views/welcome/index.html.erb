@@ -3,10 +3,56 @@
 
     <h1>Are You Within Bombing Range?</h1>
 
+    <div id="address">
+      <%= form_tag do %>
+      <%= label_tag("address") %>
+      <%= text_field_tag("address") %>
+      <%= submit_tag("Submit") %>
+      <% end %>
+
     <div id="map">
       <script>
       L.mapbox.accessToken = 'pk.eyJ1IjoiY2x1aHJpbmciLCJhIjoiNWF2Z1l6ZyJ9.8peAq7kTQyvXShlVv1K82w';
       var map = L.mapbox.map('map', 'cluhring.l1b0862b')
+
+      var myLayer = L.mapbox.featureLayer().addTo(map);
+      myLayer.setGeoJSON(geojson);
+
+      var output = document.getElementById('output');
+
+      // Initialize the geocoder control and add it to the map.
+      var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
+      geocoderControl.addTo(map);
+
+      // Listen for the `found` result and display the first result
+      // in the output container. For all available events, see
+      // https://www.mapbox.com/mapbox.js/api/v2.1.5/l-mapbox-geocodercontrol/#section-geocodercontrol-on
+      geocoderControl.on('found', function(res) {
+        output.innerHTML = JSON.stringify(res.results.features[0]);
+      });
+
+      var geojson = [
+    {
+      "type": "FeatureCollection",
+      "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -77.0366048812866,
+        38.89784666877921
+        ]
+      },
+      "properties": {
+        "title": "The White House",
+        "marker-color": "#9c89cc",
+        "marker-size": "medium",
+        "marker-symbol": "building"
+      }
+    }
+    ]
+  }
       </script>
     </div>
 </div>

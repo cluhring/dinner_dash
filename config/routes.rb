@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       delete :remove_item
     end
   end
+  resources :welcome
   resources :categories
   resources :orders_items
   root "welcome#index"
