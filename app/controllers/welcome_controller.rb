@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
 
   def create
     @output = params[:address]
+    require 'pry' ; binding.pry
     redirect_to "/"
   end
 end
