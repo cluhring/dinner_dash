@@ -3,10 +3,15 @@
     <div class="col-md-12">
 
       <h1>Are you within burrito bombing range?</h1>
-      <%= ENV["MAPBOX_TOKEN"] %>
+      <!-- <%= ENV["MAPBOX_TOKEN"] %> -->
       <!-- <div id="map" data-map=<%#= ENV["MAPBOX_TOKEN"] %>> -->
-      <div id="map" data-map=<%= Rails.application.secrets.mapbox_token %>>
+      <!-- <div id="map" data-map=<%= Rails.application.secrets.mapbox_token %>> -->
+      <div id='map'></div>
+      <script>
+      L.mapbox.accessToken = '<%= Rails.application.secrets.mapbox_token %>';
+      var map = L.mapbox.map('map', 'cluhring.l1b0862b')
 
+      </script>
       </div>
     </div>
   </div>
